@@ -197,7 +197,11 @@ static NSDictionary<NSString *, NSString *> *_Nonnull PACQueryParametersFromURL(
 
 /// Loads the consent form HTML into the web view.
 - (void)loadWebView {
+#if SWIFT_PACKAGE
+  NSBundle *bundle = SWIFTPM_MODULE_BUNDLE;
+#else
   NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+#endif
   NSBundle *resourceBundle = [self resourceBundleForBundle:bundle];
   if (!resourceBundle) {
     resourceBundle = [self resourceBundleForBundle:[NSBundle mainBundle]];
